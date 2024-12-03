@@ -3,10 +3,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: white;
+  min-height: 100vh;
 }
 
 .logo-section {
-  margin-bottom: 60rpx;
+  margin: 80rpx 0;
   text-align: center;
   width: 100%;
   display: flex;
@@ -18,67 +20,102 @@
   width: 120rpx;
   height: 120rpx;
   margin-bottom: 20rpx;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
 }
 
 .app-name {
   font-size: 36rpx;
-  font-weight: bold;
+  font-weight: 500;
   text-align: center;
   width: 100%;
+  color: #333;
+  letter-spacing: 2rpx;
 }
 
 .login-form {
   width: 100%;
-  margin-bottom: 40rpx;
+  padding: 40rpx;
 }
 
 .input-group {
-  margin-bottom: 20rpx;
+  margin-bottom: 32rpx;
+  position: relative;
 }
 
 .input-box {
   display: flex;
   align-items: center;
-  background: #f5f5f5;
+  background: transparent;
   padding: 20rpx;
-  border-radius: 8rpx;
+  border-bottom: 2rpx solid #e0e0e0;
+  transition: all 0.3s;
+}
+
+.input-box:focus-within {
+  border-bottom-color: #FF9FB3;
 }
 
 .icon {
   width: 40rpx;
   height: 40rpx;
   margin-right: 20rpx;
+  opacity: 0.6;
 }
 
 input {
   flex: 1;
   font-size: 28rpx;
+  height: 48rpx;
+  color: #333;
+}
+
+input::placeholder {
+  color: #999;
 }
 
 .error-msg {
   color: #ff4d4f;
   font-size: 24rpx;
   margin-top: 8rpx;
+  position: absolute;
+  bottom: -28rpx;
+  left: 0;
 }
 
 .login-btn {
   width: 100%;
-  margin-top: 40rpx;
+  margin-top: 60rpx;
   background: #FF9FB3;
   color: white;
-  border-radius: 8rpx;
+  border-radius: 44rpx;
+  height: 88rpx;
+  font-size: 32rpx;
+  letter-spacing: 2rpx;
+  box-shadow: 0 4rpx 12rpx rgba(255, 159, 179, 0.3);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.login-btn:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 6rpx rgba(255, 159, 179, 0.2);
 }
 
 .register-link {
   text-align: center;
   font-size: 26rpx;
   color: #FF9FB3;
-  margin-top: 20rpx;
+  margin-top: 32rpx;
+  padding: 16rpx;
 }
 
 .third-party-login {
   width: 100%;
-  margin-top: 60rpx;
+  margin-top: 80rpx;
 }
 
 .divider {
@@ -87,26 +124,44 @@ input {
   font-size: 24rpx;
   margin-bottom: 30rpx;
   position: relative;
-}
-
-.login-methods {
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1rpx;
+  background: #e0e0e0;
+  margin: 0 24rpx;
+}
+
+.login-methods {
+  width: 100%;
+}
+
 .login-method {
-  display: flex;
-  flex-direction: column;
+  background: white;
+  width: 100%;
+  height: 88rpx;
+  border-radius: 44rpx;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.08);
+  border: 2rpx solid #e0e0e0;
 }
 
 .method-icon {
-  width: 80rpx;
-  height: 80rpx;
-  margin-bottom: 10rpx;
+  width: 44rpx;
+  height: 44rpx;
+  margin-right: 16rpx;
 }
 
 .method-name {
-  font-size: 24rpx;
+  font-size: 32rpx;
+  font-weight: 500;
   color: #666;
 } 
