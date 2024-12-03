@@ -1,7 +1,7 @@
 {
   "pages":[
+    "pages/ledger/ledgerList",
     "pages/login/login",
-    "pages/project/projectList",
     "pages/index/index",
     "pages/logs/logs",
     "pages/expense/add",
