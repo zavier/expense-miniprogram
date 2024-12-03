@@ -1,0 +1,68 @@
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <input type="text" placeholder="搜索账本..." bindinput="onSearch"/>
+  </view>
+
+  <!-- 项目列表 -->
+  <view class="project-list">
+    <!-- 日常账本 -->
+    <view class="project-card daily" bindtap="onCardTap" data-id="{{item.id}}">
+      <view class="project-icon">⭐</view>
+      <view class="project-info">
+        <text class="project-name">日常账本</text>
+        <view class="project-amount">
+          <view class="amount-item">
+            <text>收入：</text>
+            <text>2650.00</text>
+          </view>
+          <view class="amount-item">
+            <text>支出：</text>
+            <text>601058.89</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 澳门账本 -->
+    <view class="project-card macau" bindtap="onCardTap" data-id="{{item.id}}">
+      <view class="project-icon">🔒</view>
+      <view class="project-info">
+        <text class="project-name">澳门</text>
+        <view class="project-amount">
+          <view class="amount-item">
+            <text>收入：</text>
+            <text>0.00</text>
+          </view>
+          <view class="amount-item">
+            <text>支出：</text>
+            <text>1519.50</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 广州账本 -->
+    <view class="project-card guangzhou" bindtap="onCardTap" data-id="{{item.id}}">
+      <view class="project-icon">🔒</view>
+      <view class="project-info">
+        <text class="project-name">广州</text>
+        <view class="project-amount">
+          <view class="amount-item">
+            <text>收入：</text>
+            <text>0.00</text>
+          </view>
+          <view class="amount-item">
+            <text>支出：</text>
+            <text>1475.48</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 添加新账本 -->
+    <view class="project-card add-new" bindtap="onAddNew">
+      <text>添加账本</text>
+    </view>
+  </view>
+</view>

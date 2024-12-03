@@ -1,12 +1,19 @@
 {
   "pages":[
+    "pages/login/login",
+    "pages/project/projectList",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/expense/add",
+    "pages/expense/list",
+    "pages/expense/split",
+    "pages/statistics/index",
+    "pages/member/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "MiniProgram",
     "navigationBarTextStyle":"black"
   },
   "style": "v2",

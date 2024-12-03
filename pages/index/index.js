@@ -3,26 +3,29 @@
 const app = getApp()
 
 Page({
-  data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName') // 如需尝试获取用户信息可改为false
-  },
+  data: {},
   // 事件处理函数
   bindViewTap() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
   },
   onLoad() {
-    if (wx.getUserProfile) {
-      this.setData({
-        canIUseGetUserProfile: true
-      })
-    }
+  },
+  listProject() {
+    wx.request({
+      url: 'http://localhost:8080/wx/expense/project/list?page=1&size=10',
+      method: 'GET', // 或者 'POST'
+      success: function (res) {
+        // 请求成功，处理返回的数据
+        console.log(res.data);
+        // 在这里更新页面数据，比如
+        this.setData({
+          projectList: res.data
+        });
+      },
+      fail: function (error) {
+        // 请求失败的处理
+        console.error('请求失败', error);
+      }
+    });
   },
   getUserProfile(e) {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗

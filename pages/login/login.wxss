@@ -1,0 +1,142 @@
+.container {
+  height: 100vh;
+  background: linear-gradient(180deg, #F8F9FD 0%, #FFFFFF 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 40rpx;
+}
+
+.logo-section {
+  margin-top: 120rpx;
+  margin-bottom: 80rpx;
+  text-align: center;
+}
+
+.logo {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 40rpx;
+  margin-bottom: 24rpx;
+}
+
+.app-name {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.login-form {
+  width: 100%;
+  padding: 40rpx;
+  background: white;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.05);
+}
+
+.input-group {
+  margin-bottom: 32rpx;
+}
+
+.input-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 16rpx;
+}
+
+.input-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #F8F9FD;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.input-box input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.input-box .icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 16rpx;
+}
+
+.login-btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background: #7FD4FF;
+  color: white;
+  font-size: 32rpx;
+  border-radius: 44rpx;
+  margin-top: 48rpx;
+  font-weight: normal;
+}
+
+.login-btn:active {
+  opacity: 0.9;
+}
+
+.register-link {
+  margin-top: 32rpx;
+  font-size: 28rpx;
+  color: #7FD4FF;
+  text-align: center;
+}
+
+.third-party-login {
+  margin-top: 80rpx;
+  width: 100%;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  color: #999;
+  font-size: 24rpx;
+  margin-bottom: 40rpx;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1rpx;
+  background: #E8E8E8;
+  margin: 0 24rpx;
+}
+
+.login-methods {
+  display: flex;
+  justify-content: center;
+  gap: 60rpx;
+}
+
+.login-method {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.method-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 16rpx;
+}
+
+.method-name {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.error-msg {
+  color: #FF9FB3;
+  font-size: 24rpx;
+  margin-top: 8rpx;
+} 
