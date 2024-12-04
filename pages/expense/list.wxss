@@ -1,18 +1,8 @@
 /* pages/expense/list.wxss */
 .container {
-  padding: 24rpx;
+  padding: 16rpx;
   background: #F8F9FD;
   min-height: 100vh;
-}
-
-.header {
-  margin-bottom: 24rpx;
-}
-
-.title {
-  font-size: 36rpx;
-  font-weight: 500;
-  color: #333;
 }
 
 .expense-list {
@@ -23,7 +13,7 @@
   background: white;
   border-radius: 16rpx;
   padding: 24rpx;
-  margin-bottom: 24rpx;
+  margin-bottom: 16rpx;
   box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
 }
 
@@ -94,7 +84,8 @@
 
 .members-list {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  min-height: 32rpx;
 }
 
 .member-tags {
@@ -102,14 +93,22 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12rpx;
+  align-items: center;
+  min-height: 32rpx;
 }
 
 .member-tag {
-  padding: 4rpx 16rpx;
+  padding: 0 12rpx;
   background: rgba(255, 159, 179, 0.1);
   color: #FF9FB3;
   border-radius: 8rpx;
   font-size: 24rpx;
+  height: 34rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  line-height: 0.5;
 }
 
 .empty-state, .loading {

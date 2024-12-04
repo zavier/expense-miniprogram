@@ -1,10 +1,5 @@
 <!--pages/expense/list.wxml-->
 <view class="container">
-  <!-- 列表头部 -->
-  <view class="header">
-    <text class="title">费用明细</text>
-  </view>
-
   <!-- 费用列表 -->
   <view class="expense-list">
     <view class="expense-item" wx:for="{{expenses}}" wx:key="recordId">
