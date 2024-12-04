@@ -1,66 +1,72 @@
 // pages/expense/list.js
+const app = getApp()
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    projectId: null,
+    expenses: [],
+    loading: false
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad(options) {
-
+    if (options.projectId) {
+      this.setData({ projectId: options.projectId })
+      this.fetchExpenses()
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
+  // 获取费用列表
+  async fetchExpenses() {
+    if (this.data.loading) return
 
+    try {
+      this.setData({ loading: true })
+
+      const res = await app.request({
+        url: '/expense/project/listRecord',
+        method: 'GET',
+        data: {
+          projectId: this.data.projectId
+        }
+      })
+
+      if (res.data.status === 0) {
+        // 格式化数据
+        const expenses = res.data.data.rows.map(item => ({
+          ...item,
+          // 将时间戳转换为日期字符串
+          dateStr: this.formatDate(item.date)
+        }))
+
+        this.setData({ expenses })
+      } else {
+        wx.showToast({
+          title: '获取费用列表失败',
+          icon: 'none'
+        })
+      }
+    } catch (error) {
+      console.error('获取费用列表错误:', error)
+      wx.showToast({
+        title: '网络错误，请重试',
+        icon: 'none'
+      })
+    } finally {
+      this.setData({ loading: false })
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
+  // 格式化日期
+  formatDate(timestamp) {
+    if (!timestamp) return ''
+    const date = new Date(timestamp * 1000)
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
+  // 下拉刷新
   onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+    this.fetchExpenses().then(() => {
+      wx.stopPullDownRefresh()
+    })
   }
 })

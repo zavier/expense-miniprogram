@@ -1,2 +1,58 @@
 <!--pages/expense/list.wxml-->
-<text>pages/expense/list.wxml</text>
+<view class="container">
+  <!-- 列表头部 -->
+  <view class="header">
+    <text class="title">费用明细</text>
+  </view>
+
+  <!-- 费用列表 -->
+  <view class="expense-list">
+    <view class="expense-item" wx:for="{{expenses}}" wx:key="recordId">
+      <view class="expense-header">
+        <view class="expense-date">
+          <text class="date">{{item.dateStr}}</text>
+        </view>
+        <view class="expense-amount">
+          <text class="currency">¥</text>
+          <text class="amount">{{item.amount}}</text>
+        </view>
+      </view>
+
+      <view class="expense-content">
+        <view class="expense-info">
+          <view class="info-row">
+            <text class="label">付款人：</text>
+            <text class="value">{{item.payMember}}</text>
+          </view>
+          <view class="info-row">
+            <text class="label">类型：</text>
+            <text class="value type-tag">{{item.expenseType}}</text>
+          </view>
+          <view class="info-row" wx:if="{{item.remark}}">
+            <text class="label">备注：</text>
+            <text class="value">{{item.remark}}</text>
+          </view>
+        </view>
+
+        <view class="members-list">
+          <text class="label">消费人：</text>
+          <view class="member-tags">
+            <text class="member-tag" wx:for="{{item.consumeMembers}}" wx:key="*this" wx:for-item="member">
+              {{member}}
+            </text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 无数据提示 -->
+  <view class="empty-state" wx:if="{{!loading && (!expenses || expenses.length === 0)}}">
+    <text>暂无费用记录</text>
+  </view>
+
+  <!-- 加载提示 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

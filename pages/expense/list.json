@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "费用明细",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#F8F9FD"
 }
