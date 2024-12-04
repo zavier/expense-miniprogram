@@ -28,7 +28,7 @@
 
 .expense-date {
   color: #666;
-  font-size: 28rpx;
+  font-size: 26rpx;
 }
 
 .expense-amount {
@@ -37,19 +37,19 @@
 }
 
 .currency {
-  font-size: 24rpx;
+  font-size: 26rpx;
   color: #333;
   margin-right: 4rpx;
 }
 
 .amount {
-  font-size: 36rpx;
+  font-size: 32rpx;
   font-weight: 500;
   color: #333;
 }
 
 .expense-content {
-  font-size: 28rpx;
+  font-size: 26rpx;
 }
 
 .expense-info {
@@ -60,17 +60,21 @@
   display: flex;
   align-items: center;
   margin-bottom: 12rpx;
+  padding-left: 0;
+  position: relative;
 }
 
 .label {
   color: #999;
   margin-right: 16rpx;
-  min-width: 100rpx;
+  width: 140rpx;
+  text-align: left;
+  flex-shrink: 0;
 }
 
 .value {
   color: #333;
-  flex: 1;
+  padding-left: 0;
 }
 
 .type-tag {
@@ -79,22 +83,24 @@
   background: rgba(127, 212, 255, 0.1);
   color: #7FD4FF;
   border-radius: 8rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
+  margin-left: 0;
 }
 
 .members-list {
   display: flex;
   align-items: center;
   min-height: 32rpx;
+  padding-left: 0;
 }
 
 .member-tags {
-  flex: 1;
   display: flex;
   flex-wrap: wrap;
   gap: 12rpx;
   align-items: center;
   min-height: 32rpx;
+  margin-left: 0;
 }
 
 .member-tag {
@@ -102,7 +108,7 @@
   background: rgba(255, 159, 179, 0.1);
   color: #FF9FB3;
   border-radius: 8rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
   height: 34rpx;
   display: inline-flex;
   align-items: center;
