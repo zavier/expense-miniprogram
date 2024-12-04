@@ -1,16 +1,4 @@
 const app = getApp()
-const baseUrl = 'https://zhengw-tech.com'
-
-// 将wx.request包装成Promise
-const wxRequest = (options) => {
-  return new Promise((resolve, reject) => {
-    wx.request({
-      ...options,
-      success: (res) => resolve(res),
-      fail: (err) => reject(err)
-    })
-  })
-}
 
 Page({
   data: {
@@ -65,35 +53,15 @@ Page({
     try {
       this.setData({ loading: true })
       
-      const token = wx.getStorageSync('jwtToken')
-      if (!token) {
-        wx.redirectTo({
-          url: '/pages/login/login'
-        })
-        return
-      }
-      
-      const res = await wxRequest({
-        url: `${baseUrl}/expense/project/list`,
+      const res = await app.request({
+        url: '/expense/project/list',
         method: 'GET',
         data: {
           page: this.data.pageNum,
           size: this.data.pageSize
-        },
-        header: {
-          'Cookie': `jwtToken=${token}`
         }
       })
       console.log('res:' + JSON.stringify(res));
-
-      // 如果返回未授权状态码，跳转到登录页
-      if (res.statusCode === 401 || res.data.status === 401) {
-        wx.removeStorageSync('jwtToken')
-        wx.redirectTo({
-          url: '/pages/login/login'
-        })
-        return
-      }
 
       if (res.data.status === 0) {
         const { items, total } = res.data.data
