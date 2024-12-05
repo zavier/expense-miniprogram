@@ -1,7 +1,7 @@
 // app.js
 App({
   globalData: {
-    baseUrl: 'https://zhengw-tech.com'
+    baseUrl: 'https://api.zhengw-tech.com'
   },
   request(options) {
     const token = wx.getStorageSync('jwtToken')
