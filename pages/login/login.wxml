@@ -1,7 +1,7 @@
 <view class="container">
   <view class="logo-section">
     <image class="logo" src="/assets/logo.png" />
-    <text class="app-name">费用管理</text>
+    <text class="app-name">费用账本</text>
   </view>
 
   <view class="login-form">
