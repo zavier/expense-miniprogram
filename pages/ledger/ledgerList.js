@@ -113,7 +113,9 @@ Page({
 
   // 添加新项目
   onAddNew() {
-    // TODO: 实现添加项目功能
+    wx.navigateTo({
+      url: '/pages/expense/create'
+    })
   },
 
   // 点击项目卡片

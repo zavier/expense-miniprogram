@@ -1,0 +1,45 @@
+<view class="container">
+  <view class="form-group">
+    <view class="form-item">
+      <text class="label">账本名称</text>
+      <input 
+        class="input" 
+        placeholder="请输入账本名称" 
+        value="{{projectName}}"
+        bindinput="onProjectNameInput"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="label">账本描述</text>
+      <textarea 
+        class="textarea" 
+        placeholder="请输入账本描述" 
+        value="{{projectDesc}}"
+        bindinput="onProjectDescInput"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="label">添加成员</text>
+      <view class="member-input">
+        <input 
+          class="input" 
+          placeholder="请输入成员名称" 
+          value="{{newMember}}"
+          bindinput="onMemberInput"
+        />
+        <button class="add-btn" bindtap="addMember">添加</button>
+      </view>
+    </view>
+
+    <view class="members-list">
+      <view class="member-item" wx:for="{{members}}" wx:key="index">
+        <text>{{item}}</text>
+        <text class="delete-btn" bindtap="removeMember" data-index="{{index}}">×</text>
+      </view>
+    </view>
+  </view>
+
+  <button class="submit-btn" bindtap="submitForm">创建账本</button>
+</view> 

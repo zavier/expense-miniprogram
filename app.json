@@ -8,7 +8,8 @@
     "pages/expense/list",
     "pages/expense/split",
     "pages/statistics/index",
-    "pages/member/index"
+    "pages/member/index",
+    "pages/expense/create"
   ],
   "window":{
     "backgroundTextStyle":"light",
