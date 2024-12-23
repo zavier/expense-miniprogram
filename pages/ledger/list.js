@@ -114,7 +114,7 @@ Page({
   // 添加新项目
   onAddNew() {
     wx.navigateTo({
-      url: '/pages/expense/create'
+      url: '/pages/ledger/create'
     })
   },
 

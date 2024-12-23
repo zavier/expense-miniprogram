@@ -1,15 +1,13 @@
 {
   "pages":[
-    "pages/ledger/ledgerList",
+    "pages/ledger/list",
+    "pages/ledger/create",
+
     "pages/login/login",
-    "pages/index/index",
-    "pages/logs/logs",
+    
     "pages/expense/add",
     "pages/expense/list",
-    "pages/expense/split",
-    "pages/statistics/index",
-    "pages/member/index",
-    "pages/expense/create"
+    "pages/expense/split"
   ],
   "window":{
     "backgroundTextStyle":"light",

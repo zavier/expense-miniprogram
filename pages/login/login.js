@@ -64,7 +64,7 @@ Page({
         
         // 跳转到账本列表页
         wx.reLaunch({
-          url: '/pages/ledger/ledgerList'
+          url: '/pages/ledger/list'
         })
       } else {
         // 显示错误信息
