@@ -142,14 +142,6 @@ Page({
     })
   },
 
-  // 查看分摊明细
-  viewSplitDetails(e) {
-    const { id } = e.currentTarget.dataset
-    wx.navigateTo({
-      url: `/pages/expense/split?projectId=${id}`
-    })
-  },
-
   // 查看统计信息
   viewStatistics(e) {
     const { id } = e.currentTarget.dataset

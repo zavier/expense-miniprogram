@@ -4,10 +4,9 @@
     "pages/ledger/create",
 
     "pages/login/login",
-    
+
     "pages/expense/add",
-    "pages/expense/list",
-    "pages/expense/split"
+    "pages/expense/list"
   ],
   "window":{
     "backgroundTextStyle":"light",
