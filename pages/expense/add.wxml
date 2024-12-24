@@ -1,63 +1,62 @@
 <view class="container">
-  <form bindsubmit="handleSubmit">
-    <!-- 金额输入 -->
-    <view class="form-item">
-      <text class="label">金额</text>
-      <input type="digit" name="amount" placeholder="请输入金额" class="input"/>
-    </view>
+  <view class="form-card">
+    <form class="form-content" bindsubmit="handleSubmit">
+      <!-- 金额输入 -->
+      <view class="form-item">
+        <text class="form-label">金额</text>
+        <input type="digit" name="amount" placeholder="请输入金额" class="form-input"/>
+      </view>
 
-    <!-- 支付人选择 -->
-    <view class="form-item">
-      <text class="label">支付人</text>
-      <picker bindchange="handlePayerChange" range="{{members}}" range-key="name">
-        <view class="picker {{selectedPayer ? '' : 'placeholder'}}">
-          {{selectedPayer ? selectedPayer.name : '请选择支付人'}}
-        </view>
-      </picker>
-    </view>
+      <!-- 支付人选择 -->
+      <view class="form-item">
+        <text class="form-label">支付人</text>
+        <picker bindchange="handlePayerChange" range="{{members}}" range-key="name">
+          <view class="form-input picker {{selectedPayer ? '' : 'placeholder'}}">
+            {{selectedPayer ? selectedPayer.name : '请选择支付人'}}
+          </view>
+        </picker>
+      </view>
 
-    <!-- 使用人多选 -->
-    <view class="form-item">
-      <text class="label">使用人</text>
-      <view class="users-select">
-        <view class="user-tag {{item.selected ? 'selected' : ''}}" 
-              wx:for="{{members}}" 
-              wx:key="id"
-              bindtap="toggleUser"
-              data-id="{{item.id}}">
-          {{item.name}}
+      <!-- 使用人多选 -->
+      <view class="form-item">
+        <text class="form-label">使用人</text>
+        <view class="member-tags">
+          <view class="member-tag {{item.selected ? 'selected' : ''}}" 
+                wx:for="{{members}}" 
+                wx:key="id"
+                bindtap="toggleUser"
+                data-id="{{item.id}}">
+            {{item.name}}
+          </view>
         </view>
       </view>
-    </view>
 
-    <!-- 费用类型选择 -->
-    <view class="form-item">
-      <text class="label">费用类型</text>
-      <picker bindchange="handleTypeChange" range="{{expenseTypes}}" range-key="name">
-        <view class="picker {{selectedType ? '' : 'placeholder'}}">
-          {{selectedType ? selectedType.name : '请选择费用类型'}}
-        </view>
-      </picker>
-    </view>
+      <!-- 费用类型选择 -->
+      <view class="form-item">
+        <text class="form-label">费用类型</text>
+        <picker bindchange="handleTypeChange" range="{{expenseTypes}}" range-key="name">
+          <view class="form-input picker {{selectedType ? '' : 'placeholder'}}">
+            {{selectedType ? selectedType.name : '请选择费用类型'}}
+          </view>
+        </picker>
+      </view>
 
-    <!-- 消费日期选择 -->
-    <view class="form-item">
-      <text class="label">消费日期</text>
-      <picker mode="date" bindchange="handleDateChange" value="{{date}}">
-        <view class="picker">{{date || '请选择日期'}}</view>
-      </picker>
-    </view>
+      <!-- 消费日期选择 -->
+      <view class="form-item">
+        <text class="form-label">消费日期</text>
+        <picker mode="date" bindchange="handleDateChange" value="{{date}}">
+          <view class="form-input picker">{{date || '请选择日期'}}</view>
+        </picker>
+      </view>
 
-    <!-- 备注输入 -->
-    <view class="form-item">
-      <text class="label">备注</text>
-      <textarea name="remark" placeholder="请输入备注信息" class="textarea"/>
-    </view>
+      <!-- 备注输入 -->
+      <view class="form-item">
+        <text class="form-label">备注</text>
+        <textarea name="remark" placeholder="请输入备注信息" class="form-textarea"/>
+      </view>
+    </form>
+  </view>
 
-    <!-- 提交按钮 -->
-    <view class="form-actions">
-      <button class="btn-cancel" bindtap="handleCancel">取消</button>
-      <button class="btn-submit" form-type="submit">确认</button>
-    </view>
-  </form>
+  <!-- 底部提交按钮 -->
+  <button class="submit-btn" bindtap="handleSubmit">添加费用</button>
 </view> 

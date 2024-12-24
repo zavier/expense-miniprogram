@@ -1,92 +1,103 @@
 .container {
-  padding: 30rpx;
+  padding: 0;
+  background: #F8F9FD;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-card {
   background: #fff;
+  margin: 24rpx 0;
+  padding: 32rpx 40rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-content {
+  width: 100%;
 }
 
 .form-item {
-  margin-bottom: 30rpx;
+  width: 100%;
+  margin-bottom: 40rpx;
 }
 
-.label {
+.form-label {
   display: block;
   font-size: 28rpx;
-  color: #333;
-  margin-bottom: 16rpx;
+  color: #666;
+  margin-bottom: 20rpx;
 }
 
-.input {
+.form-input {
   width: 100%;
-  height: 80rpx;
-  background: #f5f5f5;
-  border-radius: 8rpx;
-  padding: 0 20rpx;
+  height: 88rpx;
+  background: #F7F8FA;
+  border-radius: 16rpx;
+  padding: 0 32rpx;
   font-size: 28rpx;
+  box-sizing: border-box;
+  display: block;
 }
 
-.picker {
-  width: 100%;
-  height: 80rpx;
-  background: #f5f5f5;
-  border-radius: 8rpx;
-  padding: 0 20rpx;
-  font-size: 28rpx;
-  line-height: 80rpx;
+.form-input.picker {
+  line-height: 88rpx;
 }
 
-.picker.placeholder {
+.form-input.placeholder {
   color: #999;
 }
 
-.users-select {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20rpx;
+.form-textarea {
+  width: 100%;
+  height: 160rpx;
+  background: #F7F8FA;
+  border-radius: 16rpx;
+  padding: 24rpx 32rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
 }
 
-.user-tag {
-  padding: 10rpx 30rpx;
-  background: #f5f5f5;
-  border-radius: 30rpx;
+.member-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.member-tag {
+  padding: 16rpx 32rpx;
+  background: rgba(247, 248, 250, 0.8);
+  border-radius: 12rpx;
   font-size: 26rpx;
   color: #666;
 }
 
-.user-tag.selected {
-  background: #1890ff;
-  color: #fff;
+.member-tag.selected {
+  background: rgba(255, 159, 179, 0.1);
+  color: #FF9FB3;
 }
 
-.textarea {
-  width: 100%;
-  height: 160rpx;
-  background: #f5f5f5;
-  border-radius: 8rpx;
-  padding: 20rpx;
-  font-size: 28rpx;
-}
-
-.form-actions {
-  margin-top: 60rpx;
-  display: flex;
-  justify-content: space-between;
-  gap: 30rpx;
-}
-
-.btn-cancel, .btn-submit {
-  flex: 1;
+.submit-btn {
+  width: calc(100% - 80rpx);
   height: 88rpx;
-  line-height: 88rpx;
-  text-align: center;
-  border-radius: 44rpx;
-  font-size: 32rpx;
-}
-
-.btn-cancel {
-  background: #f5f5f5;
-  color: #666;
-}
-
-.btn-submit {
-  background: #1890ff;
+  background: #FF9FB3;
   color: #fff;
+  font-size: 32rpx;
+  border-radius: 16rpx;
+  border: none;
+  margin: 24rpx 40rpx;
+  box-shadow: 0 2rpx 8rpx rgba(255, 159, 179, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-btn::after {
+  border: none;
+}
+
+.submit-btn:active {
+  opacity: 0.9;
 } 

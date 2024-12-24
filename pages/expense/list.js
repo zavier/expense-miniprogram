@@ -72,7 +72,7 @@ Page({
 
   onAddExpense() {
     wx.navigateTo({
-      url: '/pages/expense/add'
+      url: '/pages/expense/add?projectId=' + this.data.projectId
     })
   }
 })

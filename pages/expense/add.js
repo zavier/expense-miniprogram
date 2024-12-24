@@ -1,6 +1,9 @@
+const app = getApp()
+
 Page({
   data: {
-    members: [], // 项目成员列表
+    projectId: null,
+    members: [],
     expenseTypes: [
       { id: 1, name: '餐饮' },
       { id: 2, name: '交通' },
@@ -12,36 +15,47 @@ Page({
     selectedPayer: null,
     selectedType: null,
     date: '',
-    projectId: '' // 当前项目ID
   },
 
   onLoad(options) {
-    const { projectId } = options;
-    this.setData({ projectId });
-    this.fetchMembers();
+    if (options.projectId) {
+      this.setData({ projectId: options.projectId })
+      this.fetchMembers()
+    }
   },
 
   // 获取项目成员
   async fetchMembers() {
     try {
-      // 这里调用获取成员接口
-      const members = await wx.cloud.callFunction({
-        name: 'getProjectMembers',
-        data: { projectId: this.data.projectId }
-      });
-      
-      // 为每个成员添加selected属性用于多选
-      const formattedMembers = members.data.map(member => ({
-        ...member,
-        selected: false
-      }));
-      
-      this.setData({ members: formattedMembers });
+      const res = await app.request({
+        url: '/expense/project/listMember',
+        method: 'GET',
+        data: {
+          projectId: this.data.projectId
+        }
+      })
+
+      if (res.data.status === 0) {
+        // 将返回的数据转换为组件需要的格式
+        const members = res.data.data.map(item => ({
+          id: item.member,
+          name: item.member,
+          selected: false
+        }))
+        
+        this.setData({ members })
+      } else {
+        wx.showToast({
+          title: '获取成员列表失败',
+          icon: 'none'
+        })
+      }
     } catch (error) {
+      console.error('获取成员列表错误:', error)
       wx.showToast({
-        title: '获取成员失败',
+        title: '网络错误，请重试',
         icon: 'none'
-      });
+      })
     }
   },
 
