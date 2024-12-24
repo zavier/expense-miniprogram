@@ -100,4 +100,47 @@
 
 .submit-btn:active {
   opacity: 0.9;
+}
+
+.back-to-select {
+  margin-top: 16rpx;
+  color: #FF9FB3;
+  font-size: 26rpx;
+  text-align: right;
+  padding: 8rpx 0;
+}
+
+.back-to-select:active {
+  opacity: 0.8;
+}
+
+/* 添加金额输入相关样式 */
+.amount-input-container {
+  display: flex;
+  align-items: center;
+  background: #F7F8FA;
+  border-radius: 16rpx;
+  padding: 0 32rpx;
+  height: 88rpx;
+  transition: all 0.3s;
+}
+
+.amount-input-container.focused {
+  background: #fff;
+  box-shadow: 0 0 0 2rpx #FF9FB3;
+}
+
+.currency-symbol {
+  color: #333;
+  font-size: 32rpx;
+  margin-right: 16rpx;
+}
+
+.amount-input {
+  flex: 1;
+  height: 88rpx;
+  background: transparent;
+  padding: 0;
+  font-size: 32rpx;
+  color: #333;
 } 

@@ -20,14 +20,9 @@
   box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
 }
 
-/* 奇数项使用淡蓝色背景 */
-.expense-item:nth-child(odd) {
-  background: rgba(127, 212, 255, 0.1);
-}
-
-/* 偶数项使用淡粉色背景 */
-.expense-item:nth-child(even) {
-  background: rgba(255, 159, 179, 0.1);
+/* 使用淡粉色背景 */
+.expense-item {
+  background: rgba(255, 159, 179, 0.03);
 }
 
 .expense-header {

@@ -3,18 +3,16 @@ const app = getApp()
 Page({
   data: {
     projectId: null,
-    members: [],
-    expenseTypes: [
-      { id: 1, name: '餐饮' },
-      { id: 2, name: '交通' },
-      { id: 3, name: '住宿' },
-      { id: 4, name: '购物' },
-      { id: 5, name: '娱乐' },
-      { id: 6, name: '其他' }
-    ],
+    expenseTypes: ['餐饮', '交通', '住宿', '购物', '娱乐', '其他'],
     selectedPayer: null,
-    selectedType: null,
+    consumers:[],
+    expenseType: '',
+    customType: '',
+    showCustomType: false,
     date: '',
+    amount: '',
+    amountFocus: false,
+    remark: '',
   },
 
   onLoad(options) {
@@ -83,8 +81,28 @@ Page({
   // 选择费用类型
   handleTypeChange(e) {
     const index = e.detail.value;
+    const selectedType = this.data.expenseTypes[index];
+    
+    // 如果选择"其他"，显示自定义输入框
+    if (selectedType === '其他') {
+      this.setData({
+        showCustomType: true,
+        expenseType: ''
+      });
+    } else {
+      this.setData({
+        expenseType: selectedType,
+        showCustomType: false,
+        customType: ''
+      });
+    }
+  },
+
+  // 新增：处理自定义类型输入
+  handleCustomTypeInput(e) {
     this.setData({
-      selectedType: this.data.expenseTypes[index]
+      expenseType: e.detail.value,
+      customType: e.detail.value
     });
   },
 
@@ -100,15 +118,74 @@ Page({
     wx.navigateBack();
   },
 
+  // 处理金额输入
+  handleAmountInput(e) {
+    let value = e.detail.value;
+    // 限制只能输入数字和小数点
+    value = value.replace(/[^\d.]/g, '');
+    // 限制只能有一个小数点
+    if (value.split('.').length > 2) {
+      value = value.slice(0, value.lastIndexOf('.'));
+    }
+    // 限制小数点后两位
+    if (value.includes('.')) {
+      const [integer, decimal] = value.split('.');
+      if (decimal.length > 2) {
+        value = `${integer}.${decimal.slice(0, 2)}`;
+      }
+    }
+    
+    this.setData({ amount: value });
+    return value;
+  },
+
+  // 金额输入框获得焦点
+  handleAmountFocus() {
+    this.setData({ amountFocus: true });
+  },
+
+  // 金额输入框失去焦点
+  handleAmountBlur() {
+    this.setData({ amountFocus: false });
+    // 格式化金额显示
+    if (this.data.amount) {
+      this.setData({
+        amount: Number(this.data.amount).toFixed(2)
+      });
+    }
+  },
+
+  // 处理备注输入
+  handleRemarkInput(e) {
+    this.setData({
+      remark: e.detail.value
+    });
+  },
+
   // 提交表单
   async handleSubmit(e) {
-    const { amount, remark } = e.detail.value;
-    const { selectedPayer, selectedType, date, members, projectId } = this.data;
+    const { 
+      selectedPayer, 
+      expenseType, 
+      date, 
+      members, 
+      projectId,
+      amount,
+      remark
+    } = this.data;
 
     // 表单验证
-    if (!amount || !selectedPayer || !selectedType || !date) {
+    if (!amount || !selectedPayer || !date) {
       wx.showToast({
         title: '请填写完整信息',
+        icon: 'none'
+      });
+      return;
+    }
+
+    if (!expenseType.trim()) {
+      wx.showToast({
+        title: '请选择或输入费用类型',
         icon: 'none'
       });
       return;
@@ -125,33 +202,50 @@ Page({
 
     try {
       // 这里调用添加费用接口
-      await wx.cloud.callFunction({
-        name: 'addExpense',
+      const res = await app.request({
+        url: '/expense/project/addRecord',
+        method: 'POST',
         data: {
           projectId,
           amount: Number(amount),
-          payerId: selectedPayer.id,
-          userIds: users.map(user => user.id),
-          typeId: selectedType.id,
-          date,
-          remark
+          payMember: selectedPayer.name,
+          consumerMembers: users.map(user => user.id),
+          expenseType: expenseType.trim(),
+          date: new Date(date).getTime() / 1000,
+          remark: remark.trim()
         }
       });
 
-      wx.showToast({
-        title: '添加成功',
-        icon: 'success'
-      });
+      if (res.data.status === 0) {
+        wx.showToast({
+          title: '添加成功',
+          icon: 'success'
+        });
 
-      // 返回上一页
-      setTimeout(() => {
-        wx.navigateBack();
-      }, 1500);
+        // 返回上一页
+        setTimeout(() => {
+          wx.navigateBack();
+        }, 1500);
+      } else {
+        wx.showToast({
+          title: res.data.msg || '添加失败',
+          icon: 'none'
+        });
+      }
     } catch (error) {
+      console.error('添加费用错误:', error);
       wx.showToast({
-        title: '添加失败',
+        title: '网络错误，请重试',
         icon: 'none'
       });
     }
+  },
+
+  backToSelect() {
+    this.setData({
+      showCustomType: false,
+      customType: '',
+      expenseType: ''  // 清空已选择的类型
+    });
   }
 }); 

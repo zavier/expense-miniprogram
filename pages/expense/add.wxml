@@ -4,7 +4,18 @@
       <!-- 金额输入 -->
       <view class="form-item">
         <text class="form-label">金额</text>
-        <input type="digit" name="amount" placeholder="请输入金额" class="form-input"/>
+        <view class="amount-input-container {{amountFocus ? 'focused' : ''}}">
+          <text class="currency-symbol">¥</text>
+          <input 
+            type="digit"
+            class="form-input amount-input"
+            value="{{amount}}"
+            placeholder="0.00"
+            bindinput="handleAmountInput"
+            bindfocus="handleAmountFocus"
+            bindblur="handleAmountBlur"
+          />
+        </view>
       </view>
 
       <!-- 支付人选择 -->
@@ -34,11 +45,22 @@
       <!-- 费用类型选择 -->
       <view class="form-item">
         <text class="form-label">费用类型</text>
-        <picker bindchange="handleTypeChange" range="{{expenseTypes}}" range-key="name">
-          <view class="form-input picker {{selectedType ? '' : 'placeholder'}}">
-            {{selectedType ? selectedType.name : '请选择费用类型'}}
+        <picker bindchange="handleTypeChange" range="{{expenseTypes}}" wx:if="{{!showCustomType}}">
+          <view class="form-input picker {{expenseType ? '' : 'placeholder'}}">
+            {{expenseType || '请选择费用类型'}}
           </view>
         </picker>
+        <!-- 自定义类型输入框 -->
+        <block wx:if="{{showCustomType}}">
+          <input 
+            class="form-input" 
+            placeholder="请输入费用类型" 
+            value="{{customType}}"
+            bindinput="handleCustomTypeInput"
+          />
+          <!-- 可选：添加一个返回选择的按钮 -->
+          <view class="back-to-select" bindtap="backToSelect">返回选择</view>
+        </block>
       </view>
 
       <!-- 消费日期选择 -->
@@ -52,7 +74,12 @@
       <!-- 备注输入 -->
       <view class="form-item">
         <text class="form-label">备注</text>
-        <textarea name="remark" placeholder="请输入备注信息" class="form-textarea"/>
+        <textarea 
+          class="form-textarea" 
+          placeholder="请输入备注信息" 
+          value="{{remark}}"
+          bindinput="handleRemarkInput"
+        />
       </view>
     </form>
   </view>
