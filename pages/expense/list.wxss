@@ -3,10 +3,13 @@
   padding: 16rpx;
   background: #F8F9FD;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .expense-list {
   width: 100%;
+  flex: 1;
 }
 
 .expense-item {
@@ -15,6 +18,16 @@
   padding: 24rpx;
   margin-bottom: 16rpx;
   box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+
+/* 奇数项使用淡蓝色背景 */
+.expense-item:nth-child(odd) {
+  background: rgba(127, 212, 255, 0.1);
+}
+
+/* 偶数项使用淡粉色背景 */
+.expense-item:nth-child(even) {
+  background: rgba(255, 159, 179, 0.1);
 }
 
 .expense-header {
@@ -80,7 +93,7 @@
 .type-tag {
   display: inline-block;
   padding: 4rpx 16rpx;
-  background: rgba(127, 212, 255, 0.1);
+  background: rgba(127, 212, 255, 0.2);
   color: #7FD4FF;
   border-radius: 8rpx;
   font-size: 26rpx;
@@ -105,7 +118,7 @@
 
 .member-tag {
   padding: 0 12rpx;
-  background: rgba(255, 159, 179, 0.1);
+  background: rgba(255, 159, 179, 0.2);
   color: #FF9FB3;
   border-radius: 8rpx;
   font-size: 26rpx;
@@ -122,6 +135,10 @@
   padding: 48rpx 0;
   color: #999;
   font-size: 28rpx;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .add-button-container {
