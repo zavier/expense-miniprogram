@@ -1,5 +1,10 @@
 <!--pages/expense/list.wxml-->
 <view class="container">
+  <!-- 添加顶部按钮 -->
+  <view class="add-button-container">
+    <button class="add-button" bindtap="onAddExpense">添加费用</button>
+  </view>
+  
   <!-- 费用列表 -->
   <view class="expense-list">
     <view class="expense-item" wx:for="{{expenses}}" wx:key="recordId">

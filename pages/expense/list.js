@@ -68,5 +68,11 @@ Page({
     this.fetchExpenses().then(() => {
       wx.stopPullDownRefresh()
     })
+  },
+
+  onAddExpense() {
+    wx.navigateTo({
+      url: '/pages/expense/add'
+    })
   }
 })
