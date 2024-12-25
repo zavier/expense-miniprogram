@@ -12,12 +12,12 @@
         <text class="project-name">{{item.name}}</text>
         <view class="project-amount">
           <view class="amount-item">
-            <text>收入：</text>
-            <text>{{item.income || '0.00'}}</text>
+            <text>成员：</text>
+            <text>{{item.totalMember || '0'}}</text>
           </view>
           <view class="amount-item">
             <text>支出：</text>
-            <text>{{item.expense || '0.00'}}</text>
+            <text>{{item.totalExpense || '0.00'}}</text>
           </view>
         </view>
       </view>

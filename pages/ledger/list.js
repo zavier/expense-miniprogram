@@ -61,7 +61,6 @@ Page({
           size: this.data.pageSize
         }
       })
-      console.log('res:' + JSON.stringify(res));
 
       if (res.data.status === 0) {
         const { items, total } = res.data.data
@@ -71,8 +70,8 @@ Page({
           id: item.projectId,
           name: item.projectName,
           description: item.projectDesc,
-          income: '0.00',  // 这里可以根据实际接口返回数据调整
-          expense: '0.00'  // 这里可以根据实际接口返回数据调整
+          totalMember: item.totalMember,
+          totalExpense: item.totalExpense,
         }))
 
         this.setData({
