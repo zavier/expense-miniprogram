@@ -1,0 +1,73 @@
+<view class="container">
+  <view class="form-card">
+    <view class="form-header">
+      <text class="title">注册账号</text>
+      <text class="subtitle">创建一个新的账号</text>
+    </view>
+
+    <view class="form-content">
+      <!-- 昵称输入 -->
+      <view class="form-item">
+        <text class="form-label">昵称</text>
+        <input 
+          class="form-input"
+          type="text"
+          placeholder="请输入昵称"
+          value="{{nickname}}"
+          bindinput="handleNicknameInput"
+        />
+      </view>
+
+      <!-- 邮箱输入 -->
+      <view class="form-item">
+        <text class="form-label">邮箱</text>
+        <input 
+          class="form-input"
+          type="text"
+          placeholder="请输入邮箱"
+          value="{{email}}"
+          bindinput="handleEmailInput"
+        />
+      </view>
+
+      <!-- 密码输入 -->
+      <view class="form-item">
+        <text class="form-label">密码</text>
+        <input 
+          class="form-input"
+          type="password"
+          placeholder="请输入密码（至少6位）"
+          value="{{password}}"
+          bindinput="handlePasswordInput"
+        />
+      </view>
+
+      <!-- 确认密码 -->
+      <view class="form-item">
+        <text class="form-label">确认密码</text>
+        <input 
+          class="form-input"
+          type="password"
+          placeholder="请再次输入密码"
+          value="{{confirmPassword}}"
+          bindinput="handleConfirmPasswordInput"
+        />
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <button 
+    class="submit-btn" 
+    bindtap="handleSubmit"
+    loading="{{submitLoading}}"
+    disabled="{{submitLoading}}"
+  >
+    注册
+  </button>
+
+  <!-- 返回登录 -->
+  <view class="back-to-login" bindtap="handleCancel">
+    返回登录
+  </view>
+</view> 

@@ -6,7 +6,9 @@
     "pages/login/login",
 
     "pages/expense/add",
-    "pages/expense/list"
+    "pages/expense/list",
+
+    "pages/register/register"
   ],
   "window":{
     "backgroundTextStyle":"light",

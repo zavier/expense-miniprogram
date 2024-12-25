@@ -1,0 +1,100 @@
+.container {
+  padding: 0;
+  background: #F8F9FD;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-card {
+  background: #fff;
+  margin: 24rpx 0;
+  padding: 32rpx 40rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-header {
+  margin-bottom: 48rpx;
+  text-align: center;
+}
+
+.title {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.form-content {
+  width: 100%;
+}
+
+.form-item {
+  width: 100%;
+  margin-bottom: 40rpx;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 88rpx;
+  background: #F7F8FA;
+  border-radius: 16rpx;
+  padding: 0 32rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.submit-btn {
+  width: calc(100% - 80rpx);
+  height: 88rpx;
+  background: #FF9FB3;
+  color: #fff;
+  font-size: 32rpx;
+  border-radius: 16rpx;
+  border: none;
+  margin: 24rpx 40rpx;
+  box-shadow: 0 2rpx 8rpx rgba(255, 159, 179, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-btn::after {
+  border: none;
+}
+
+.submit-btn:active {
+  opacity: 0.9;
+}
+
+.submit-btn[disabled] {
+  opacity: 0.6;
+  background: #FF9FB3;
+  color: #fff;
+}
+
+.back-to-login {
+  text-align: center;
+  font-size: 28rpx;
+  color: #666;
+  margin: 32rpx 0;
+}
+
+.back-to-login:active {
+  opacity: 0.7;
+} 

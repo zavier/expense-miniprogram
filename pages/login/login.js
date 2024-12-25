@@ -92,9 +92,8 @@ Page({
 
   // 跳转到注册页
   goToRegister() {
-    wx.showToast({
-      title: '注册功能开发中',
-      icon: 'none'
+    wx.navigateTo({
+      url: '/pages/register/register'
     })
   }
 }) 
