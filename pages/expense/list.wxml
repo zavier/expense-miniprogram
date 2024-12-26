@@ -13,24 +13,26 @@
     </view>
     
     <scroll-view class="member-cards" scroll-x="true" enhanced="true" show-scrollbar="false">
-      <view class="member-card" wx:for="{{memberStats}}" wx:key="member">
-        <view class="member-name">{{item.member}}</view>
-        <view class="stats-grid">
-          <view class="stats-item">
-            <text class="label">参与总额</text>
-            <text class="value">¥{{item.totalAmount}}</text>
-          </view>
-          <view class="stats-item">
-            <text class="label">应付金额</text>
-            <text class="value">¥{{item.shouldPay}}</text>
-          </view>
-          <view class="stats-item">
-            <text class="label">实付金额</text>
-            <text class="value">¥{{item.actualPay}}</text>
-          </view>
-          <view class="stats-item {{item.balance >= 0 ? 'positive' : 'negative'}}">
-            <text class="label">{{item.balance >= 0 ? '应收' : '应付'}}</text>
-            <text class="value">¥{{Math.abs(item.balance).toFixed(2)}}</text>
+      <view class="member-cards-content">
+        <view class="member-card" wx:for="{{memberStats}}" wx:key="member">
+          <view class="member-name">{{item.member}}</view>
+          <view class="stats-grid">
+            <view class="stats-item">
+              <text class="label">参与总额</text>
+              <text class="value">¥{{item.totalAmount}}</text>
+            </view>
+            <view class="stats-item">
+              <text class="label">应付金额</text>
+              <text class="value">¥{{item.shouldPay}}</text>
+            </view>
+            <view class="stats-item">
+              <text class="label">实付金额</text>
+              <text class="value">¥{{item.actualPay}}</text>
+            </view>
+            <view class="stats-item {{item.balance >= 0 ? 'positive' : 'negative'}}">
+              <text class="label">{{item.balance >= 0 ? '应收' : '应付'}}</text>
+              <text class="value">¥{{Math.abs(item.balance).toFixed(2)}}</text>
+            </view>
           </view>
         </view>
       </view>

@@ -171,6 +171,8 @@
   margin-bottom: 24rpx;
   padding: 24rpx 0;
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .statistics-header {
@@ -195,19 +197,31 @@
 .member-cards {
   white-space: nowrap;
   padding: 0 24rpx;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.member-cards-content {
+  display: inline-flex;
+  padding-bottom: 24rpx;
+  min-width: 100%;
 }
 
 .member-card {
   display: inline-block;
-  width: 520rpx;
+  width: 460rpx;
   background: #F8F9FD;
   border-radius: 16rpx;
   padding: 24rpx;
   margin-right: 16rpx;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .member-card:last-child {
-  margin-right: 24rpx;
+  margin-right: 0;
 }
 
 .member-name {
@@ -246,4 +260,9 @@
 
 .stats-item.negative .value {
   color: #ff4d4f;
+}
+
+/* 隐藏滚动条但保持可滚动 */
+.member-cards::-webkit-scrollbar {
+  display: none;
 }
