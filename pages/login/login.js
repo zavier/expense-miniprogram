@@ -4,7 +4,8 @@ Page({
   data: {
     username: '',
     password: '',
-    errors: {}
+    errors: {},
+    loading: false
   },
 
   // 用户名输入
@@ -82,12 +83,52 @@ Page({
     }
   },
 
-  // 微信登录
-  handleWechatLogin() {
-    wx.showToast({
-      title: '微信登录功能开发中',
-      icon: 'none'
-    })
+  // 处理微信登录
+  async handleWechatLogin() {
+    if (this.data.loading) return
+    
+    try {
+      this.setData({ loading: true })
+      
+      // 获取微信登录code
+      const loginRes = await wx.login()
+      
+      if (!loginRes.code) {
+        throw new Error('获取微信登录凭证失败')
+      }
+
+      // 发送code到后端
+      const res = await app.request({
+        url: '/expense/wx/user/login',
+        method: 'GET',
+        data: {
+          code: loginRes.code
+        }
+      })
+
+      if (res.data.status === 0) {
+        // 保存登录信息
+        wx.setStorageSync('jwtToken', res.data.data)
+
+        // 登录成功后跳转到首页
+        wx.reLaunch({
+          url: '/pages/ledger/list'
+        })
+      } else {
+        wx.showToast({
+          title: res.data.msg || '登录失败',
+          icon: 'none'
+        })
+      }
+    } catch (error) {
+      console.error('微信登录错误:', error)
+      wx.showToast({
+        title: '登录失败，请重试',
+        icon: 'none'
+      })
+    } finally {
+      this.setData({ loading: false })
+    }
   },
 
   // 跳转到注册页
