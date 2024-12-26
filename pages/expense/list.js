@@ -5,7 +5,30 @@ Page({
   data: {
     projectId: null,
     expenses: [],
-    loading: false
+    loading: false,
+    memberStats: [
+      {
+        member: '张三',
+        totalAmount: '1200.00',
+        shouldPay: '400.00',
+        actualPay: '600.00',
+        balance: 200.00  // 正数表示应收，负数表示应付
+      },
+      {
+        member: '李四',
+        totalAmount: '900.00',
+        shouldPay: '400.00',
+        actualPay: '300.00',
+        balance: -100.00
+      },
+      {
+        member: '王五',
+        totalAmount: '600.00',
+        shouldPay: '400.00',
+        actualPay: '300.00',
+        balance: -100.00
+      }
+    ]
   },
 
   onLoad(options) {

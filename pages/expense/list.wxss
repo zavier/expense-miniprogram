@@ -163,3 +163,87 @@
 .add-button:active {
   opacity: 0.9;
 }
+
+/* 新增统计部分样式 */
+.statistics-section {
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 24rpx;
+  padding: 24rpx 0;
+  overflow: hidden;
+}
+
+.statistics-header {
+  padding: 0 24rpx;
+  margin-bottom: 24rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statistics-header .title {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.statistics-header .subtitle {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.member-cards {
+  white-space: nowrap;
+  padding: 0 24rpx;
+}
+
+.member-card {
+  display: inline-block;
+  width: 520rpx;
+  background: #F8F9FD;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-right: 16rpx;
+}
+
+.member-card:last-child {
+  margin-right: 24rpx;
+}
+
+.member-name {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 24rpx;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24rpx;
+}
+
+.stats-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-item .label {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.stats-item .value {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.stats-item.positive .value {
+  color: #52c41a;
+}
+
+.stats-item.negative .value {
+  color: #ff4d4f;
+}

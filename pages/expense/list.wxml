@@ -5,6 +5,38 @@
     <button class="add-button" bindtap="onAddExpense">添加费用</button>
   </view>
   
+  <!-- 新增：成员金额统计区域 -->
+  <view class="statistics-section">
+    <view class="statistics-header">
+      <text class="title">成员账单统计</text>
+      <text class="subtitle">左滑查看更多 ></text>
+    </view>
+    
+    <scroll-view class="member-cards" scroll-x="true" enhanced="true" show-scrollbar="false">
+      <view class="member-card" wx:for="{{memberStats}}" wx:key="member">
+        <view class="member-name">{{item.member}}</view>
+        <view class="stats-grid">
+          <view class="stats-item">
+            <text class="label">参与总额</text>
+            <text class="value">¥{{item.totalAmount}}</text>
+          </view>
+          <view class="stats-item">
+            <text class="label">应付金额</text>
+            <text class="value">¥{{item.shouldPay}}</text>
+          </view>
+          <view class="stats-item">
+            <text class="label">实付金额</text>
+            <text class="value">¥{{item.actualPay}}</text>
+          </view>
+          <view class="stats-item {{item.balance >= 0 ? 'positive' : 'negative'}}">
+            <text class="label">{{item.balance >= 0 ? '应收' : '应付'}}</text>
+            <text class="value">¥{{Math.abs(item.balance).toFixed(2)}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
   <!-- 费用列表 -->
   <view class="expense-list">
     <view class="expense-item" wx:for="{{expenses}}" wx:key="recordId">
