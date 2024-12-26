@@ -31,7 +31,7 @@
             </view>
             <view class="stats-item {{item.balance >= 0 ? 'positive' : 'negative'}}">
               <text class="label">{{item.balance >= 0 ? '应收' : '应付'}}</text>
-              <text class="value">¥{{Math.abs(item.balance).toFixed(2)}}</text>
+              <text class="value">¥{{item.balance >= 0 ? item.balance : -item.balance}}</text>
             </view>
           </view>
         </view>
