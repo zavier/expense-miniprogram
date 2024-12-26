@@ -87,14 +87,6 @@ Page({
           title: '创建成功',
           icon: 'success'
         })
-        // 返回上一页并刷新列表
-
-        // 获取页面栈
-        const pages = getCurrentPages()
-        // 获取上一页实例
-        const prevPage = pages[pages.length - 2]
-        // 调用上一页的刷新方法(假设上一页有 loadData 方法)
-        prevPage && prevPage.fetchProjects()
 
         wx.navigateBack({
           delta: 1

@@ -22,11 +22,10 @@
   flex-wrap: wrap;
   gap: 16px;
   padding: 0;
-  justify-content: space-between;
 }
 
 .project-card {
-  width: calc(50% - 8px);
+  width: calc((100% - 16px) / 2);
   height: 140px;
   margin: 0;
   padding: 16px;
@@ -86,4 +85,8 @@
   padding: 20px 0;
   color: #999;
   font-size: 14px;
+}
+.project-list::after {
+  content: "";
+  width: calc((100% - 16px) / 2);
 }
