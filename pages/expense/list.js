@@ -4,8 +4,11 @@ const app = getApp()
 Page({
   data: {
     projectId: null,
+    projectName: null,
     expenses: [],
     loading: false,
+    isShared: false,
+    shareToken: null,
     memberStats: []  // 改为空数组，等待接口数据
   },
 
@@ -16,9 +19,22 @@ Page({
 
   onLoad(options) {
     if (options.projectId) {
-      this.setData({ projectId: options.projectId })
+      this.setData({ 
+        projectId: options.projectId,
+        projectName: options.name,
+        isShared: !!options.isShared,
+        shareToken: options.shareToken
+      })
       this.fetchExpenses()
-      this.fetchMemberStats()  // 添加获取成员统计数据
+      this.fetchMemberStats()
+      
+      // 如果是通过分享进入，可以显示提示或进行其他处理
+      if (options.isShared) {
+        wx.showToast({
+          title: '欢迎查看共享账单',
+          icon: 'none'
+        })
+      }
     }
   },
 
@@ -29,13 +45,24 @@ Page({
     try {
       this.setData({ loading: true })
 
-      const res = await app.request({
-        url: '/expense/project/listRecord',
-        method: 'GET',
-        data: {
-          projectId: this.data.projectId
-        }
-      })
+      let res;
+      if (this.data.isShared) {
+        res = await app.request({
+          url: '/expense/wx/project/listRecord/share',
+          method: 'GET',
+          data: {
+            shareToken: this.data.shareToken
+          }
+        })
+      } else {
+        res = await app.request({
+          url: '/expense/project/listRecord',
+          method: 'GET',
+          data: {
+            projectId: this.data.projectId
+          }
+        })
+      }
 
       if (res.data.status === 0) {
         // 格式化数据
@@ -73,13 +100,24 @@ Page({
   // 新增：获取成员账单统计
   async fetchMemberStats() {
     try {
-      const res = await app.request({
-        url: '/expense/project/sharing',
-        method: 'GET',
-        data: {
-          projectId: this.data.projectId
-        }
-      })
+      let res
+      if (this.data.isShared) {
+        res = await app.request({
+          url: '/expense/wx/project/sharing/share',
+          method: 'GET',
+          data: {
+            shareToken: this.data.shareToken
+          }
+        })
+      } else {
+        res = await app.request({
+          url: '/expense/project/sharing',
+          method: 'GET',
+          data: {
+            projectId: this.data.projectId
+          }
+        })
+      }
 
       if (res.data.status === 0 && res.data.data.rows) {
         // 处理数据，计算差额
@@ -122,5 +160,48 @@ Page({
     wx.navigateTo({
       url: '/pages/expense/add?projectId=' + this.data.projectId
     })
+  },
+
+  // 添加页面分享配置
+  async onShareAppMessage() {
+    const projectName = this.data.projectName || '费用明细'
+    
+    try {
+      const res = await app.request({
+        url: '/expense/wx/project/shareToken',
+        method: 'GET',
+        data: {
+          projectId: this.data.projectId
+        }
+      })
+
+      if (res.data.status === 0 && res.data.data) {
+        return {
+          title: `${projectName} - 快来查看我们的账单吧`,
+          path: `/pages/expense/list?projectId=${this.data.projectId}&shareToken=${res.data.data}&isShared=true`,
+          imageUrl: '/images/share-cover.png'
+        }
+      }
+
+      wx.showToast({
+        title: '生成分享链接失败',
+        icon: 'none'
+      })
+      return {
+        title: projectName,
+        path: '/pages/index/index'
+      }
+      
+    } catch (error) {
+      console.error('生成分享链接错误:', error)
+      wx.showToast({
+        title: '生成分享链接失败',
+        icon: 'none'
+      })
+      return {
+        title: projectName,
+        path: '/pages/index/index'
+      }
+    }
   }
 })

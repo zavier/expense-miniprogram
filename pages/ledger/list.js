@@ -131,9 +131,9 @@ Page({
 
   // 点击项目卡片
   onCardTap(e) {
-    const { id } = e.currentTarget.dataset
+    const { id, name } = e.currentTarget.dataset
     wx.navigateTo({
-      url: `/pages/expense/list?projectId=${id}`
+      url: `/pages/expense/list?projectId=${id}&name=${name}`
     })
   },
 

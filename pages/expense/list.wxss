@@ -137,31 +137,40 @@
 }
 
 .add-button-container {
-  width: 100%;
-  padding: 24rpx 16rpx;
-  background: #F8F9FD;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  display: flex;
+  gap: 20rpx;
+  padding: 20rpx;
 }
 
+.add-button, .share-button {
+  flex: 1;
+  background: #FF9FB3;
+  color: white;
+  border: none;
+  font-size: 28rpx;
+  transition: opacity 0.2s;
+}
+
+/* 主按钮样式 */
 .add-button {
   background: #FF9FB3;
-  color: #fff;
-  font-size: 28rpx;
-  width: 100%;
-  border-radius: 16rpx;
-  box-shadow: 0 2rpx 8rpx rgba(255, 159, 179, 0.2);
-  border: none;
 }
 
-.add-button::after {
-  border: none;
+/* 次要按钮样式 */
+.share-button {
+  background: rgba(255, 159, 179, 0.8);
 }
 
-/* 按钮按下效果 */
-.add-button:active {
-  opacity: 0.9;
+/* 按钮点击效果 */
+.add-button:active,
+.share-button:active {
+  opacity: 0.8;
+}
+
+/* 去除按钮的默认边框和高亮效果 */
+.add-button::after,
+.share-button::after {
+  border: none;
 }
 
 /* 新增统计部分样式 */

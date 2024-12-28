@@ -11,7 +11,7 @@
   <!-- 账本列表 -->
   <view class="project-list">
     <!-- 日常账本 -->
-    <view wx:for="{{projects}}" wx:key="id" class="project-card {{index % 2 === 0 ? 'blue' : 'pink'}}" bindtap="onCardTap" data-id="{{item.id}}">
+    <view wx:for="{{projects}}" wx:key="id" class="project-card {{index % 2 === 0 ? 'blue' : 'pink'}}" bindtap="onCardTap" data-id="{{item.id}}" data-name="{{item.name}}">
       <view class="project-info">
         <text class="project-name">{{item.name}}</text>
         <view class="project-amount">

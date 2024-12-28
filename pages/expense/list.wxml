@@ -1,8 +1,9 @@
 <!--pages/expense/list.wxml-->
 <view class="container">
   <!-- 添加顶部按钮 -->
-  <view class="add-button-container">
+  <view class="add-button-container" wx:if="{{!isShared}}">
     <button class="add-button" bindtap="onAddExpense">添加费用</button>
+    <button class="share-button" open-type="share">分享账单</button>
   </view>
   
   <!-- 新增：成员金额统计区域 -->
