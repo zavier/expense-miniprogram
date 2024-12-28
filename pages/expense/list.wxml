@@ -9,7 +9,6 @@
   <view class="statistics-section">
     <view class="statistics-header">
       <text class="title">成员账单统计</text>
-      <text class="subtitle">左滑查看更多 ></text>
     </view>
     
     <scroll-view class="member-cards" scroll-x="true" enhanced="true" show-scrollbar="false">

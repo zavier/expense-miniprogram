@@ -6,9 +6,13 @@ Page({
     loading: false,
     searchText: '',
     pageNum: 1,
-    pageSize: 10,
+    pageSize: 2000,
     hasMore: true,
     total: 0
+  },
+
+  onShow() {
+    this.fetchProjects()
   },
 
   onLoad() {
@@ -20,7 +24,6 @@ Page({
       })
       return
     }
-    this.fetchProjects()
   },
 
   // 下拉刷新
@@ -62,8 +65,7 @@ Page({
 
   // 获取项目列表
   async fetchProjects() {
-    if (this.data.loading || !this.data.hasMore) return
-    
+    // if (this.data.loading || !this.data.hasMore) return
     try {
       this.setData({ loading: true })
       
@@ -90,7 +92,8 @@ Page({
         }))
 
         this.setData({
-          projects: [...this.data.projects, ...formattedItems],
+          // TODO 合并project
+          projects: [...formattedItems],
           total,
           hasMore: this.data.projects.length + formattedItems.length < total
         })
@@ -117,12 +120,6 @@ Page({
     } finally {
       this.setData({ loading: false })
     }
-  },
-
-  // 搜索项目
-  onSearch(e) {
-    const keyword = e.detail.value
-    // TODO: 实现搜索功能
   },
 
   // 添加新项目
