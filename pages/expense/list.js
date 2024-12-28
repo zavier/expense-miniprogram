@@ -9,6 +9,11 @@ Page({
     memberStats: []  // 改为空数组，等待接口数据
   },
 
+  onShow() {
+    this.fetchExpenses()
+    this.fetchMemberStats()
+  },
+
   onLoad(options) {
     if (options.projectId) {
       this.setData({ projectId: options.projectId })
