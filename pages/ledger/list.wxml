@@ -1,7 +1,11 @@
 <view class="container">
-  <!-- 搜索栏 -->
-  <view class="search-bar">
-    <input type="text" placeholder="搜索账本..." bindinput="onSearch"/>
+<!-- 搜索栏 --> 
+  <view class="search-bar"> 
+    <input 
+      type="text" 
+      placeholder="搜索账本..." 
+      bindinput="onSearchInput" 
+      value="{{searchText}}" /> 
   </view>
 
   <!-- 账本列表 -->

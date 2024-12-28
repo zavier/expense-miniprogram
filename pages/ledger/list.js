@@ -4,6 +4,7 @@ Page({
   data: {
     projects: [],
     loading: false,
+    searchText: '',
     pageNum: 1,
     pageSize: 10,
     hasMore: true,
@@ -46,9 +47,22 @@ Page({
     }
   },
 
+  // 搜索框输入处理
+  onSearchInput(e) {
+    this.setData({ 
+      searchText: e.detail.value,
+      pageNum: 1,  // 重置页码
+      projects: [],  // 清空列表
+      hasMore: true // 重置加载状态
+    }, () => {
+      // 输入后立即搜索
+      this.fetchProjects()
+    })
+  },
+
   // 获取项目列表
   async fetchProjects() {
-    if (this.data.loading) return
+    if (this.data.loading || !this.data.hasMore) return
     
     try {
       this.setData({ loading: true })
@@ -58,7 +72,8 @@ Page({
         method: 'GET',
         data: {
           page: this.data.pageNum,
-          size: this.data.pageSize
+          size: this.data.pageSize,
+          name: this.data.searchText
         }
       })
 
