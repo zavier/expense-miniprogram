@@ -37,7 +37,7 @@ App({
     wx.setStorageSync('logs', logs)
 
     // 检查登录状态
-    const token = wx.getStorageSync('token');
+    const token = wx.getStorageSync('jwtToken');
     if (!token) {
       wx.reLaunch({
         url: '/pages/login/login'
