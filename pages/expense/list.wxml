@@ -81,6 +81,7 @@
       <!-- 编辑按钮，仅在非共享模式下显示 -->
       <view class="expense-actions" wx:if="{{!isShared}}">
         <button class="edit-button" bindtap="onEditExpense" data-record-id="{{item.recordId}}">编辑</button>
+        <button class="delete-button" bindtap="onDeleteExpense" data-record-id="{{item.recordId}}">删除</button>
       </view>
     </view>
   </view>

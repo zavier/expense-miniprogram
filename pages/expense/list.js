@@ -170,6 +170,57 @@ Page({
     })
   },
 
+  // 删除费用
+  onDeleteExpense(e) {
+    const recordId = e.currentTarget.dataset.recordId;
+
+    wx.showModal({
+      title: '确认删除',
+      content: '确定要删除这条费用记录吗？',
+      confirmColor: '#FF9FB3',
+      success: (res) => {
+        if (res.confirm) {
+          this.deleteExpense(recordId);
+        }
+      }
+    })
+  },
+
+  // 执行删除操作
+  async deleteExpense(recordId) {
+    try {
+      const res = await app.request({
+        url: '/expense/project/deleteRecord',
+        method: 'POST',
+        data: {
+          recordId: recordId,
+          projectId: this.data.projectId
+        }
+      })
+
+      if (res.data.status === 0) {
+        wx.showToast({
+          title: '删除成功',
+          icon: 'success'
+        })
+
+        // 刷新数据
+        this.fetchExpenses()
+      } else {
+        wx.showToast({
+          title: res.data.msg || '删除失败',
+          icon: 'none'
+        })
+      }
+    } catch (error) {
+      console.error('删除费用错误:', error)
+      wx.showToast({
+        title: '网络错误，请重试',
+        icon: 'none'
+      })
+    }
+  },
+
   // 添加页面分享配置
   async onShareAppMessage() {
     const projectName = this.data.projectName || '费用明细'
