@@ -63,9 +63,17 @@ Page({
         }
 
         // 等待成员列表加载完成后再设置选中状态
-        if (this.data.members && this.data.members.length > 0) {
-          this.setMemberSelection(detail)
+        const setSelection = () => {
+          if (this.data.members && this.data.members.length > 0) {
+            this.setMemberSelection(detail)
+          } else {
+            // 如果成员还未加载完，延时检查
+            console.log("set member retry");
+            setTimeout(setSelection, 100)
+          }
         }
+
+        setSelection()
       } else {
         wx.showToast({
           title: '获取费用详情失败',
