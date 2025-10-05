@@ -3,6 +3,8 @@ const app = getApp()
 Page({
   data: {
     projectId: null,
+    recordId: null,
+    isEdit: false,
     expenseTypes: ['餐饮', '交通', '住宿', '购物', '娱乐', '其他'],
     selectedPayer: null,
     consumers:[],
@@ -17,9 +19,96 @@ Page({
 
   onLoad(options) {
     if (options.projectId) {
-      this.setData({ projectId: options.projectId })
+      this.setData({
+        projectId: options.projectId,
+        isEdit: !!options.recordId,
+        recordId: options.recordId
+      })
+
       this.fetchMembers()
+
+      // 如果是编辑模式，加载费用详情
+      if (options.projectId && options.recordId) {
+        this.loadExpenseDetail(options.projectId, options.recordId)
+      }
     }
+  },
+
+  // 加载费用详情
+  async loadExpenseDetail(projectId, recordId) {
+    try {
+      const res = await app.request({
+        url: '/expense/project/listRecord',
+        method: 'GET',
+        data: {
+          projectId: projectId
+        }
+      })
+
+      if (res.data.status === 0 && res.data.data) {
+        const detail = res.data.data.rows.find(it => it.recordId == recordId);
+        this.setData({
+          amount: detail.amount.toString(),
+          expenseType: detail.expenseType,
+          date: this.formatDateForInput(detail.date),
+          remark: detail.remark || ''
+        })
+
+        // 设置费用类型显示
+        if (!this.data.expenseTypes.includes(detail.expenseType)) {
+          this.setData({
+            showCustomType: true,
+            customType: detail.expenseType
+          })
+        }
+
+        // 等待成员列表加载完成后再设置选中状态
+        if (this.data.members && this.data.members.length > 0) {
+          this.setMemberSelection(detail)
+        }
+      } else {
+        wx.showToast({
+          title: '获取费用详情失败',
+          icon: 'none'
+        })
+      }
+    } catch (error) {
+      console.error('获取费用详情错误:', error)
+      wx.showToast({
+        title: '网络错误，请重试',
+        icon: 'none'
+      })
+    }
+  },
+
+  // 设置成员选中状态
+  setMemberSelection(detail) {
+    // 设置付款人
+    const payerIndex = this.data.members.findIndex(member => member.id === detail.payMember)
+    if (payerIndex !== -1) {
+      this.setData({
+        selectedPayer: this.data.members[payerIndex]
+      })
+    }
+
+    // 设置消费人
+    const { members } = this.data
+    const newMembers = members.map(member => {
+      const isSelected = detail.consumeMembers.includes(member.id)
+      return { ...member, selected: isSelected }
+    })
+
+    this.setData({ members: newMembers })
+  },
+
+  // 格式化日期用于输入框显示
+  formatDateForInput(timestamp) {
+    if (!timestamp) return ''
+    const date = new Date(timestamp * 1000)
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
   },
 
   // 获取项目成员
@@ -164,14 +253,16 @@ Page({
 
   // 提交表单
   async handleSubmit(e) {
-    const { 
-      selectedPayer, 
-      expenseType, 
-      date, 
-      members, 
+    const {
+      selectedPayer,
+      expenseType,
+      date,
+      members,
       projectId,
       amount,
-      remark
+      remark,
+      recordId,
+      isEdit
     } = this.data;
 
     // 表单验证
@@ -201,39 +292,66 @@ Page({
     }
 
     try {
-      // 这里调用添加费用接口
-      const res = await app.request({
-        url: '/expense/project/addRecord',
-        method: 'POST',
-        data: {
-          projectId,
-          amount: Number(amount),
-          payMember: selectedPayer.name,
-          consumerMembers: users.map(user => user.id),
-          expenseType: expenseType.trim(),
-          date: new Date(date).getTime() / 1000,
-          remark: remark.trim()
-        }
-      });
+      let res;
+      if (isEdit) {
+        // 编辑模式 - 调用更新接口
+        res = await app.request({
+          url: '/expense/project/updateRecord',
+          method: 'POST',
+          data: {
+            recordId,
+            projectId,
+            amount: Number(amount),
+            payMember: selectedPayer.name,
+            consumerMembers: users.map(user => user.id),
+            expenseType: expenseType.trim(),
+            date: new Date(date).getTime() / 1000,
+            remark: remark.trim()
+          }
+        });
+      } else {
+        // 新增模式 - 调用添加接口
+        res = await app.request({
+          url: '/expense/project/addRecord',
+          method: 'POST',
+          data: {
+            projectId,
+            amount: Number(amount),
+            payMember: selectedPayer.name,
+            consumerMembers: users.map(user => user.id),
+            expenseType: expenseType.trim(),
+            date: new Date(date).getTime() / 1000,
+            remark: remark.trim()
+          }
+        });
+      }
 
       if (res.data.status === 0) {
         wx.showToast({
-          title: '添加成功',
+          title: isEdit ? '更新成功' : '添加成功',
           icon: 'success'
         });
 
-        // 返回上一页
+        // 返回上一页并刷新
         setTimeout(() => {
+          const pages = getCurrentPages();
+          const prevPage = pages[pages.length - 2]; // 上一个页面
+
+          // 直接调用上一个页面的刷新方法
+          if (prevPage && typeof prevPage.fetchExpenses === 'function') {
+            prevPage.fetchExpenses();
+          }
+
           wx.navigateBack();
         }, 1500);
       } else {
         wx.showToast({
-          title: res.data.msg || '添加失败',
+          title: res.data.msg || (isEdit ? '更新失败' : '添加失败'),
           icon: 'none'
         });
       }
     } catch (error) {
-      console.error('添加费用错误:', error);
+      console.error('保存费用错误:', error);
       wx.showToast({
         title: '网络错误，请重试',
         icon: 'none'

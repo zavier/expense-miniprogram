@@ -162,6 +162,14 @@ Page({
     })
   },
 
+  // 编辑费用
+  onEditExpense(e) {
+    const recordId = e.currentTarget.dataset.recordId;
+    wx.navigateTo({
+      url: '/pages/expense/add?projectId=' + this.data.projectId + '&recordId=' + recordId
+    })
+  },
+
   // 添加页面分享配置
   async onShareAppMessage() {
     const projectName = this.data.projectName || '费用明细'

@@ -275,3 +275,31 @@
 .member-cards::-webkit-scrollbar {
   display: none;
 }
+
+/* 编辑按钮样式 */
+.expense-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx solid #f5f5f5;
+}
+
+.edit-button {
+  background: #FF9FB3;
+  color: white;
+  border: none;
+  font-size: 26rpx;
+  padding: 12rpx 24rpx;
+  border-radius: 8rpx;
+  height: auto;
+  line-height: 1.4;
+}
+
+.edit-button::after {
+  border: none;
+}
+
+.edit-button:active {
+  opacity: 0.8;
+}

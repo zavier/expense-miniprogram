@@ -85,5 +85,5 @@
   </view>
 
   <!-- 底部提交按钮 -->
-  <button class="submit-btn" bindtap="handleSubmit">添加费用</button>
+  <button class="submit-btn" bindtap="handleSubmit">{{isEdit ? '更新费用' : '添加费用'}}</button>
 </view> 

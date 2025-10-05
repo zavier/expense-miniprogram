@@ -1,20 +1,17 @@
 {
-  "pages":[
+  "pages": [
     "pages/ledger/list",
     "pages/ledger/create",
-
     "pages/login/login",
-
     "pages/expense/add",
     "pages/expense/list",
-
     "pages/register/register"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "MiniProgram",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
