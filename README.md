@@ -10,3 +10,7 @@
 2. 账本中添加费用信息
 3. 查询费用明细信息
 4. 计费项目中每人付款的金额及剩余应收/应付金额
+
+## 小程序二维码
+
+![小程序二维码](https://zhengw-tech.com/images/expense/share_expense_qrcode.png)
